@@ -66,20 +66,20 @@ def button(update, context):
 def command_start(update, context: CallbackContext):
     if update.effective_chat.type == "private":
         
-        addme = InlineKeyboardButton(text="🤖 Qrupa əlavə edin!", url="http://t.me/CguesCrocodileBot?startgroup=a")
-        sohbet = InlineKeyboardButton(text="💬 🇦🇿 Əsas Söhbət Qrupumuz", url="https://t.me/AzeSohbetGurupu")
-        oyun = InlineKeyboardButton(text="📣 Əsas Kanalımız", url="https://t.me/VusalinBlogu")
+        addme = InlineKeyboardButton(text="🤖 ➕️ Qrupa əlavə edin ➕️", url="http://t.me/ASOgame_bot?startgroup=a")
+        sohbet = InlineKeyboardButton(text="💬 Söhbət Qrupumuz 🍷", url="https://t.me/WerabliAnlar")
+        oyun = InlineKeyboardButton(text="📣 ASO🇦🇿 Rəsmi", url="https://t.me/ASOresmi")
         admin = InlineKeyboardButton(text="🧑🏻‍💻 Developer", url="https://t.me/Vusaliwww")
 
         keyboard = [[addme],[sohbet],[oyun],[admin]]
         reply_markup = InlineKeyboardMarkup(keyboard)
-        update.message.reply_text('👋 Salam, Mən Cgues Game oyunun aparıcısıyam.🐊', reply_to_message_id=True, reply_markup=reply_markup)
+        update.message.reply_text('👋 Salam, Mən ASO🇦🇿 Ad Game oyunun aparıcısıyam.🐊', reply_to_message_id=True, reply_markup=reply_markup)
     else:
         chat_id = update.message.chat.id
         user_id = update.message.from_user.id
         username = update.message.from_user.full_name
 
-        logger.info('Got command /basla,'
+        logger.info('Got command /game,'
                     'chat_id={},'
                     'user_id'.format(chat_id,
                                      user_id))
@@ -87,7 +87,7 @@ def command_start(update, context: CallbackContext):
         game = get_or_create_game(chat_id)
         game.start()
 
-        update.message.reply_text('Söz Oyunu Başladı Rəsmi Kanalımız qatılın @VusalinBlogu ⚡🖤'.format(username), reply_to_message_id=True)
+        update.message.reply_text('Söz Oyunu Başladı Rəsmi Kanalımız qatılın @ASOresmi 🇦🇿⚡'.format(username), reply_to_message_id=True)
 
         set_master(update, context)
 
@@ -123,7 +123,7 @@ def command_master(update: Update, context):
         return
 
     if not game.is_master_time_left():
-        update.message.reply_text('Aparıcı olmaq üçün {} saniyə qalıb'.format(game.get_master_time_left()),
+        update.message.reply_text('Aparıcı olmaq üçün {2} saniyə qalıb'.format(game.get_master_time_left()),
                                   reply_to_message_id=True)
         return
 
