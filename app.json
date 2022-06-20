@@ -3,7 +3,7 @@
 	"description": "@ismiyev95 Tərəfindən kodlanan bot list",
 	"repository": "https://github.com/Zamannismiyev/Ad-Oyunu",
 	"env": {
-		"BOT_TOKEN": {
+		"BOT_TOKEN": {5577355144:AAF1g264e9vuCeNfryURVonwPmOeXwYx0sQ}
 			"description": "@BotFather dan alınan Bot Token girin."
                    }
 	},
