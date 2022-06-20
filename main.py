@@ -120,12 +120,12 @@ def command_master(update: Update, context):
     user_id = update.message.from_user.id
 
     if not game.is_game_started():
-        return
+        returngame
 
     if not game.is_master_time_left():
         update.message.reply_text('Aparıcı olmaq üçün {} saniyə qalıb'.format(game.get_master_time_left()),
                                   reply_to_message_id=True)
-        return
+        returngame
 
     logger.info('Got command /master,'
                 'chat_id={},'
