@@ -66,14 +66,14 @@ def button(update, context):
 def command_start(update, context: CallbackContext):
     if update.effective_chat.type == "private":
         
-        addme = InlineKeyboardButton(text="🤖 ➕️ Qrupa əlavə edin ➕️", url="http://t.me/ASOgame_bot?startgroup=a")
-        sohbet = InlineKeyboardButton(text="💬 Söhbət Qrupumuz 🍷", url="https://t.me/WerabliAnlar")
-        oyun = InlineKeyboardButton(text="📣 ASO🇦🇿 Rəsmi", url="https://t.me/ASOresmi")
-        admin = InlineKeyboardButton(text="🧑🏻‍💻 Developer", url="https://t.me/Vusaliwww")
+        addme = InlineKeyboardButton(text="🤖 Qrupa əlavə edin!", url="http://t.me/ASOgame_bot?startgroup=a")
+        sohbet = InlineKeyboardButton(text="💬 Söhbət Qrupumuz ", url="https://t.me/WerabliAnlar")
+        oyun = InlineKeyboardButton(text="📣 ASO🇦 Rəsmi", url="https://t.me/ASOresmi")
+        admin = InlineKeyboardButton(text="🧑🏻‍💻 Sahibim", url="https://t.me/Vusaliwww")
 
         keyboard = [[addme],[sohbet],[oyun],[admin]]
         reply_markup = InlineKeyboardMarkup(keyboard)
-        update.message.reply_text('👋 Salam, Mən ASO🇦🇿 Ad Game oyunun aparıcısıyam.🐊', reply_to_message_id=True, reply_markup=reply_markup)
+        update.message.reply_text('👋 Salam, Mən ASO Ad Game oyunun aparıcısıyam.🐊', reply_to_message_id=True, reply_markup=reply_markup)
     else:
         chat_id = update.message.chat.id
         user_id = update.message.from_user.id
@@ -87,7 +87,7 @@ def command_start(update, context: CallbackContext):
         game = get_or_create_game(chat_id)
         game.start()
 
-        update.message.reply_text('Söz Oyunu Başladı Rəsmi Kanalımız qatılın @ASOresmi 🇦🇿⚡'.format(username), reply_to_message_id=True)
+        update.message.reply_text('Söz Oyunu Başladı Rəsmi Kanalımız qatılın @ASOresmi ⚡🇦🇿'.format(username), reply_to_message_id=True)
 
         set_master(update, context)
 
