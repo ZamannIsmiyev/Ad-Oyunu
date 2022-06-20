@@ -123,7 +123,7 @@ def command_master(update: Update, context):
         return
 
     if not game.is_master_time_left():
-        update.message.reply_text('Aparıcı olmaq üçün {2} saniyə qalıb'.format(game.get_master_time_left()),
+        update.message.reply_text('Aparıcı olmaq üçün {} saniyə qalıb'.format(game.get_master_time_left()),
                                   reply_to_message_id=True)
         return
 
