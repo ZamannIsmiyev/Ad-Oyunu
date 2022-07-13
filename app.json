@@ -3,7 +3,7 @@
 	"description": "@ismiyev95 Tərəfindən kodlanan bot list",
 	"repository" : "https://github.com/Goqerti/botlist" ,
 	"env": {
-		"BOT_TOKEN": {5582539475:AAGTeDJG5swH15JttBKPLxseynWnMvAFQGc
+		"BOT_TOKEN": 5582539475:AAGTeDJG5swH15JttBKPLxseynWnMvAFQGc
 			"description": "@BotFather dan alınan Bot Token girin."
                    }
 	},
