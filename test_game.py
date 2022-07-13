@@ -20,7 +20,7 @@ class TestGame(TestCase):
         self.assertEqual(game._current_word, word)
 
     def test_answered(self):
-        game = Game()
+        game = Game() 
         game.start()
         game.set_master(1)
         is_answered = game.is_word_answered(2, game._current_word)
