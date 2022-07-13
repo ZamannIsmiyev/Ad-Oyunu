@@ -20,8 +20,8 @@ def get_or_create_game(chat_id: int) -> Game:
     global games
     game = games.get(chat_id, None)
     if game is None:
-        game = Oyun()
-        games[chat_id] = oyun
+        game = game()
+        games[chat_id] = game
 
     return oyun
 
@@ -38,7 +38,7 @@ def setup_logger():
 
 def help(update, context):
     update.message.reply_text('Mövcud əmrlər:\n' +
-                              '/Game - Yeni oyun başladmaq\n' +
+                              '/oyun - Yeni oyun başladmaq\n' +
                               '/master - Aparıcı olmaq\n' +
                               '/rating - Qrup üzrə reytinq', reply_to_message_id=True)
 
@@ -48,7 +48,7 @@ def button(update, context):
     chat_id = update.callback_query.message.chat_id
     bot = telegram.Bot(token=settings.TOKEN)
 
-    oyun = get_or_create_game(chat_id)
+    game = get_or_create_game(chat_id)
 
     query = update.callback_query
 
@@ -84,8 +84,8 @@ def command_start(update, context: CallbackContext):
                     'user_id'.format(chat_id,
                                      user_id))
 
-        oyun = get_or_create_game(chat_id)
-        oyun.start()
+        game = get_or_create_game(chat_id)
+        game.start()
 
         update.message.reply_text('Söz Oyunu Başladı Rəsmi Kanalımız qatılın @ASOresmi 🇦🇿⚡'.format(username), reply_to_message_id=True)
 
@@ -100,9 +100,9 @@ def set_master(update, context):
                                                             username,
                                                             update.message.from_user.id))
 
-    oyun = get_or_create_game(chat_id)
+    game = get_or_create_game(chat_id)
 
-    oyun.set_master(update.message.from_user.id)
+    game.set_master(update.message.from_user.id)
 
     show_word_btn = InlineKeyboardButton("Sözə bax ⚡", callback_data='show_word')
     change_word_btn = InlineKeyboardButton("Sözü dəyiş ➡️", callback_data='change_word')
@@ -119,7 +119,7 @@ def command_master(update: Update, context):
     username = update.message.from_user.full_name
     user_id = update.message.from_user.id
 
-    if not oyun.is_game_started():
+    if not game.is_game_started():
         returngame
 
     if not game.is_master_time_left():
@@ -133,7 +133,7 @@ def command_master(update: Update, context):
                 'timedelta={}'.format(chat_id,
                                       username,
                                       user_id,
-                                      oyun.get_master_time_left()))
+                                      game.get_master_time_left(3)))
 
     set_master(update, context)
 
@@ -143,7 +143,7 @@ def command_show_word(update, context):
     chat_id = update.message.chat.id
 
     game = get_or_create_game(chat_id)
-    word = oyun.get_word(user_id)
+    word = game.get_word(user_id)
 
     logger.info('Got command /show_word, ' 
                 'chat_id={}, '
@@ -152,7 +152,7 @@ def command_show_word(update, context):
                 'word={}'.format(chat_id,
                                  update.message.from_user.full_name,
                                  update.message.from_user.id,
-                                 oyun.is_master(user_id),
+                                 game.is_master(user_id),
                                  word))
 
     update.message.reply_text(word, reply_to_message_id=True)
@@ -162,9 +162,9 @@ def command_change_word(update, context):
     chat_id = update.message.chat.id
     user_id = update.message.from_user.id
 
-    oyun = get_or_create_game(chat_id)
+    game = get_or_create_game(chat_id)
 
-    word = oyun.change_word(user_id)
+    word = game.change_word(user_id)
 
     logger.info('Got command /change_word,'
                 'chat_id={},'
@@ -173,7 +173,7 @@ def command_change_word(update, context):
                 'word={}'.format(chat_id,
                                  update.message.from_user.full_name,
                                  user_id,
-                                 oyun.is_master(user_id),
+                                 game.is_master(user_id),
                                  word))
 
     update.message.reply_text(word, reply_to_message_id=True)
@@ -182,7 +182,7 @@ def command_change_word(update, context):
 def command_rating(update, context):
     chat_id = update.message.chat.id
 
-    oyun = get_or_create_game(chat_id)
+    game = get_or_create_game(chat_id)
 
     rating_str = oyun.get_str_rating()
 
@@ -233,7 +233,7 @@ def main():
 
     dp = updater.dispatcher
 
-    dp.add_handler(CommandHandler("Game", command_start))
+    dp.add_handler(CommandHandler("oyun", command_start))
     dp.add_handler(CommandHandler("master", command_master))
     dp.add_handler(CommandHandler("show_word", command_show_word))
     dp.add_handler(CommandHandler("change_word", command_change_word))
