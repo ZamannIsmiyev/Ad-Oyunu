@@ -38,7 +38,7 @@ def setup_logger():
 
 def help(update, context):
     update.message.reply_text('Mövcud əmrlər:\n' +
-                              '/oyun - Yeni oyun başladmaq\n' +
+                              '/game - Yeni oyun başladmaq\n' +
                               '/master - Aparıcı olmaq\n' +
                               '/rating - Qrup üzrə reytinq', reply_to_message_id=True)
 
@@ -69,7 +69,7 @@ def command_start(update, context: CallbackContext):
         addme = InlineKeyboardButton(text="🤖 ➕️ Qrupa əlavə edin ➕️", url="http://t.me/Teslapro_bot?startgroup=a")
         sohbet = InlineKeyboardButton(text="💬 Söhbət Qrupumuz 🍷", url="https://t.me/WerabliAnlar")
         oyun = InlineKeyboardButton(text="📣 ASO🇦🇿 Rəsmi", url="https://t.me/ASOresmi")
-        admin = InlineKeyboardButton(text="🧑🏻‍💻 Developer", url="https://t.me/ismiyev95")
+        admin = InlineKeyboardButton(text="🧑🏻‍💻 Sahibim", url="https://t.me/ismiyev95")
 
         keyboard = [[addme],[sohbet],[oyun],[admin]]
         reply_markup = InlineKeyboardMarkup(keyboard)
@@ -79,7 +79,7 @@ def command_start(update, context: CallbackContext):
         user_id = update.message.from_user.id
         username = update.message.from_user.full_name
 
-        logger.info('Got command /oyun,'
+        logger.info('Got command /game,'
                     'chat_id={},'
                     'user_id'.format(chat_id,
                                      user_id))
@@ -233,7 +233,7 @@ def main():
 
     dp = updater.dispatcher
 
-    dp.add_handler(CommandHandler("oyun", command_start))
+    dp.add_handler(CommandHandler("game", command_start))
     dp.add_handler(CommandHandler("master", command_master))
     dp.add_handler(CommandHandler("show_word", command_show_word))
     dp.add_handler(CommandHandler("change_word", command_change_word))
